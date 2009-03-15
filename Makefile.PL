@@ -12,4 +12,6 @@ requires 'File::Temp';
 requires 'PPI';
 requires 'inc::Module::Install' => 0.79;
 
+jsonmeta;
+
 WriteAll;
