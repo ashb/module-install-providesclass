@@ -1,0 +1,7 @@
+/inc/
+Makefile
+META.yml
+.*.sw[op]
+/blib/
+pm_to_blib
+Makefile.old
