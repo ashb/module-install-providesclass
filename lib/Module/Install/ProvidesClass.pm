@@ -13,7 +13,7 @@ use ExtUtils::MM_Unix;
 BEGIN {
   our @ISA = qw(Module::Install::Base);
   our $ISCORE  = 1;
-  our $VERSION = '1.000000';
+  our $VERSION = '0.000001_01';
 }
 
 sub _get_no_index {
@@ -148,6 +148,13 @@ Module::Install::ProvidesClass - provides detection in META.yml for 'class' keyw
 This class is designed to populate the C<provides> field of META.yml files so
 that the CPAN indexer will pay attention to the existance of your classes,
 rather than blithely ignoring them.
+
+The version parsing is basically the same as what M::I's C<< ->version_form >>
+does, so should hopefully work as well as it does.
+
+Currently we only support 'class' as the keyword to look for. This will
+certainly need changing to be configurable since MooseX::Declare allows C<role>
+as a keyword to create role classes.
 
 =head1 SEE ALSO
 
