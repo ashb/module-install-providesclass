@@ -20,8 +20,8 @@ $mock->auto_provides_class;
 
 eq_or_diff(
   $mock->_provides,
-  { Bar => { file => 'foo.pm' },
-    'Bar::Foo' => { file => 'foo.pm' },
+  { Bar => { file => 'foo.pm', version => 2 },
+    'Bar::Foo' => { file => 'foo.pm', version => 3 },
     Baz => { file => 'foo.pm' }
   }
 );

@@ -7,6 +7,8 @@ use Module::Install::Base;
 use File::Find::Rule;
 use File::Find::Rule::Perl;
 use PPI;
+use File::Temp;
+use ExtUtils::MM_Unix;
 
 BEGIN {
   our @ISA = qw(Module::Install::Base);
@@ -49,7 +51,6 @@ sub auto_provides_class {
   } )->perl_module
      ->in($dir);
 
-  warn "@files";
   for (@files) {
     my $file = $_;
     s/^\Q$dir\/\E//;
@@ -101,13 +102,27 @@ sub _search_for_classes_in_node {
 
     # $n was the '{' token, its parent is the block/constructor for the 'hash'
     $n = $n->parent;
-
+  
     for ($n->children) {
 
       # Tokens can't have children
       next if $_->isa('PPI::Token');
       $self->_search_for_classes_in_node($_, "${class}::", $file)
     }
+
+    # I dont fancy duplicating the effort of parsing version numbers. So write
+    # the stuff inside {} to a tmp file and use EUMM to get the version number
+    # from it.
+    my $fh = File::Temp->new;
+    $fh->print($n->content);
+    $fh->close;
+    my $ver = ExtUtils::MM_Unix->parse_version($fh);
+
+    $self->provides->{$class}{version} = $ver if defined $ver && $ver ne "undef";
+
+    # Remove the block from the parent, so that we dont get confused by 
+    # versions of sub-classes
+    $n->parent->remove_child($n);
   }
 
   return $self;
