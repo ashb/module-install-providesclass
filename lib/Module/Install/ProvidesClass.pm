@@ -4,16 +4,11 @@ use strict;
 use warnings;
 use Module::Install::Base;
 
-use File::Find::Rule;
-use File::Find::Rule::Perl;
-use PPI;
-use File::Temp;
-use ExtUtils::MM_Unix;
 
 BEGIN {
   our @ISA = qw(Module::Install::Base);
   our $ISCORE  = 1;
-  our $VERSION = '0.000001_01';
+  our $VERSION = '0.000001';
 }
 
 sub _get_no_index {
@@ -37,6 +32,12 @@ sub _get_dir {
 
 sub auto_provides_class {
   my ($self) = @_;
+
+  require File::Find::Rule;
+  require File::Find::Rule::Perl;
+  require PPI;
+  require File::Temp;
+  require ExtUtils::MM_Unix;
 
   return $self unless $self->is_admin;
 
@@ -156,9 +157,12 @@ Currently we only support 'class' as the keyword to look for. This will
 certainly need changing to be configurable since MooseX::Declare allows C<role>
 as a keyword to create role classes.
 
+This module attempts to be author side only, hopefully it does it correctly, bu
+Module::Install is scary at times.
+
 =head1 SEE ALSO
 
-L<MooseX::Declare>
+L<MooseX::Declare> for the main reason for this module to exist.
 
 =head1 AUTHOR
 
