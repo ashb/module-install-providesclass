@@ -12,6 +12,7 @@ requires 'PPI';
 requires 'inc::Module::Install' => 0.79;
 
 test_requires 'Test::Differences';
+test_requires 'Moose';
 
 auto_provides;
 jsonmeta;
