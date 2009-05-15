@@ -1,4 +1,8 @@
 Version history for Module::Install::ProvidesClass
 
-0.000001 - 2009/03/33
+0.000001_99 - 2009/05/15
+  - Fix Moose test_requies (Kent Fredric)
+  - Dont require parsing files unless we are in admin/author mode
+
+0.000001 - 2009/03/22
   - Initial release
