@@ -33,13 +33,13 @@ sub _get_dir {
 sub auto_provides_class {
   my ($self) = @_;
 
+  return $self unless $self->is_admin;
+
   require File::Find::Rule;
   require File::Find::Rule::Perl;
   require PPI;
   require File::Temp;
   require ExtUtils::MM_Unix;
-
-  return $self unless $self->is_admin;
 
   my $no_index = $self->_get_no_index;
 
