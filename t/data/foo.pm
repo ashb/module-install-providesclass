@@ -1,6 +1,6 @@
 class Bar {
   our $VERSION = 2;
-  class Foo { 
+  class ::Foo { 
 
     use vars qw/$VERSION/;
     # Nested version!

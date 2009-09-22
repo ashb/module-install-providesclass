@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 2;
+use Test::More;
 use Test::Differences;
 
 use FindBin qw/$Bin/;
@@ -25,3 +25,5 @@ eq_or_diff(
     Baz => { file => 'foo.pm' }
   }
 );
+
+done_testing;
